@@ -36,6 +36,7 @@ export default [
         "warn",
         { allowConstantExport: true },
       ],
+      "react/prop-types": "off",
     },
   },
   // Ensure Node.js globals are applied to config files
