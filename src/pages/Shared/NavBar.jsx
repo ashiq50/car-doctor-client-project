@@ -1,22 +1,48 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+import ToggleDark from "../../toggle/toggleDark";
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOUt = () => {
+    logOut()
+      .then()
+      .catch((error) => console.log(error));
+  };
   const navItems = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <NavLink to="/about">About</NavLink>
+        <Link to="/about">About</Link>
       </li>
       <li>
-        <NavLink to="/services">Services</NavLink>
+        <Link to="/services">Services</Link>
       </li>
       <li>
-        <NavLink to="/blog">Blog</NavLink>
+        <Link to="/blog">Blog</Link>
       </li>
       <li>
-        <NavLink to="/contact">Contact</NavLink>
+        <Link to="/contact">Contact</Link>
+      </li>
+      {user?.email ? (
+        <>
+          <li>
+            <Link to="/bookings">My Bookings</Link>
+          </li>
+          <li>
+            <button onClick={handleLogOUt}>LogOut</button>
+          </li>
+        </>
+      ) : (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      )}
+      <li>
+        <ToggleDark></ToggleDark>
       </li>
     </>
   );
